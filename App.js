@@ -1,87 +1,87 @@
-import React, { Component } from 'react';
-import DocumentPicker from 'react-native-document-picker';
-import { 
-  StyleSheet, 
-  Text, 
-  TouchableOpacity, 
-  View, 
-  Alert } from 'react-native';
+// import React, { Component } from 'react';
+// import DocumentPicker from 'react-native-document-picker';
+// import { 
+//   StyleSheet, 
+//   Text, 
+//   TouchableOpacity, 
+//   View, 
+//   Alert } from 'react-native';
 
-export default class App extends Component {
+// export default class App extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      singleFileOBJ: '',
-    };
-  }
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       singleFileOBJ: '',
+//     };
+//   }
 
-  async SingleFilePicker() {
-    try {
-      const res = await DocumentPicker.pick({
-        type: [DocumentPicker.types.allFiles],
+//   async SingleFilePicker() {
+//     try {
+//       const res = await DocumentPicker.pick({
+//         type: [DocumentPicker.types.allFiles],
       
-      });
+//       });
  
-      this.setState({ singleFileOBJ: res });
+//       this.setState({ singleFileOBJ: res });
  
-    } catch (err) {
-      if (DocumentPicker.isCancel(err)) {
-        Alert.alert('Canceled');
-      } else {
-        Alert.alert('Unknown Error: ' + JSON.stringify(err));
-        throw err;
-      }
-    }
-  }
+//     } catch (err) {
+//       if (DocumentPicker.isCancel(err)) {
+//         Alert.alert('Canceled');
+//       } else {
+//         Alert.alert('Unknown Error: ' + JSON.stringify(err));
+//         throw err;
+//       }
+//     }
+//   }
  
-  render() {
-    return (
-      <View style={styles.MainContainer}>
+//   render() {
+//     return (
+//       <View style={styles.MainContainer}>
  
-        <Text style={styles.text}>
-          File Name: {this.state.singleFileOBJ.name ? this.state.singleFileOBJ.name : ''}
-        </Text>
+//         <Text style={styles.text}>
+//           File Name: {this.state.singleFileOBJ.name ? this.state.singleFileOBJ.name : ''}
+//         </Text>
  
-        <TouchableOpacity
-          activeOpacity={0.5}
-          style={styles.button}
-          onPress={this.SingleFilePicker.bind(this)}>
-          <Text style={styles.buttonText}>
-            Click Here To Pick File
-          </Text>
-        </TouchableOpacity>
+//         <TouchableOpacity
+//           activeOpacity={0.5}
+//           style={styles.button}
+//           onPress={this.SingleFilePicker.bind(this)}>
+//           <Text style={styles.buttonText}>
+//             Click Here To Pick File
+//           </Text>
+//         </TouchableOpacity>
  
-      </View>
-    );
-  }
-}
+//       </View>
+//     );
+//   }
+// }
  
-const styles = StyleSheet.create({
-  MainContainer: {
-    flex: 1,
-    backgroundColor: '#fff',
-    padding: 16,
-    justifyContent: 'center',
-  },
+// const styles = StyleSheet.create({
+//   MainContainer: {
+//     flex: 1,
+//     backgroundColor: '#fff',
+//     padding: 16,
+//     justifyContent: 'center',
+//   },
  
-  button: {
-    width: '100%',
-    backgroundColor: '#0091EA',
-    borderRadius:9,
-  },
+//   button: {
+//     width: '100%',
+//     backgroundColor: '#0091EA',
+//     borderRadius:9,
+//   },
  
-  buttonText: {
-    color: '#fff',
-    fontSize: 21,
-    padding: 10,
-    textAlign: 'center'
-  },
+//   buttonText: {
+//     color: '#fff',
+//     fontSize: 21,
+//     padding: 10,
+//     textAlign: 'center'
+//   },
  
-  text: {
-    color: '#000',
-    fontSize: 16,
-    padding: 10,
-    textAlign: 'left'
-  },
-});
+//   text: {
+//     color: '#000',
+//     fontSize: 16,
+//     padding: 10,
+//     textAlign: 'left'
+//   },
+// });
