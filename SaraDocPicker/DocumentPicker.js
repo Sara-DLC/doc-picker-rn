@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import * as Permissions from 'expo-permissions';
 import * as DocumentPicker from 'expo-document-picker';
 import { 
 StyleSheet, 
@@ -18,16 +19,20 @@ this.state = {
 
 async SingleFilePicker() {
 try {
-    const res = await DocumentPicker.getDocumentAsync({
-    type: "*",
-    copyToCacheDirectory: false,
-    multiple: false
+    const res = await DocumentPicker.pick({
+    type: [DocumentPicker.types.allFiles],
+    
     });
 
     this.setState({ singleFileOBJ: res });
 
 } catch (err) {
-    console.log(err)
+    if (DocumentPicker.isCancel(err)) {
+    Alert.alert('Canceled');
+    } else {
+    Alert.alert('Unknown Error: ' + JSON.stringify(err));
+    throw err;
+    }
 }
 }
 
