@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import * as Permissions from 'expo-permissions';
+import React from 'react';
+import * as Permissions from './Permissions';
 import * as DocumentPicker from 'expo-document-picker';
 import { 
 StyleSheet, 
@@ -8,45 +8,43 @@ TouchableOpacity,
 View, 
 Alert } from 'react-native';
 
-export default class App extends Component {
+const DocumentPicker = props => {
 
-constructor(props) {
-super(props);
-this.state = {
-    singleFileOBJ: '',
-};
+
+// permissions returns only for document permissions on iOS and under certain conditions, see Permissions.DOCUMENT
+getDocAsync = async() => {
+    const { status, permissions } = await Permissions.askAsync(Permissions.DOCUMENTS);
+    if (status === 'granted') {
+    return Document.getCurrentPositionAsync({ enableHighAccuracy: true });
+} else {
+    throw new Error('Please allow permission to upload documents from phone');
+}
 }
 
-async SingleFilePicker() {
+SingleFilePicker = async () => {
 try {
-    const res = await DocumentPicker.pick({
-    type: [DocumentPicker.types.allFiles],
-    
+    const res = await DocumentPicker.getDocumentAsync({
+    type: '*', 
     });
 
-    this.setState({ singleFileOBJ: res });
-
 } catch (err) {
-    if (DocumentPicker.isCancel(err)) {
-    Alert.alert('Canceled');
-    } else {
-    Alert.alert('Unknown Error: ' + JSON.stringify(err));
-    throw err;
+    console.log(err)
     }
 }
-}
-
-render() {
 return (
     <View style={styles.MainContainer}>
 
     <Text style={styles.text}>
-        File Name: {this.state.singleFileOBJ.name ? this.state.singleFileOBJ.name : ''}
+        File Name: 
+        {/* {this.state.singleFileOBJ.name ? this.state.singleFileOBJ.name : ''} */}
+
     </Text>
 
     <TouchableOpacity
         activeOpacity={0.5}
         style={styles.button}
+
+        //needs state update...using constructor to bind to this. 
         onPress={this.SingleFilePicker.bind(this)}>
         <Text style={styles.buttonText}>
         Click Here To Pick File
@@ -56,7 +54,10 @@ return (
     </View>
 );
 }
-}
+
+
+
+
 
 const styles = StyleSheet.create({
 MainContainer: {
@@ -86,3 +87,5 @@ padding: 10,
 textAlign: 'left'
 },
 });
+
+export default DocumentPicker;

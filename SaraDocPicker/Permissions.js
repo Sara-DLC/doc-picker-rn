@@ -1,3 +1,5 @@
+import * as EXPermissions from 'expo-permissions';
+
 export const PERMISSIONS: {[key: string]: Permissions } = {
     CALENDAR: EXPermissions.CALENDAR,
     CAMERA: EXPermissions.CAMERA,
@@ -7,6 +9,7 @@ export const PERMISSIONS: {[key: string]: Permissions } = {
     CAMERA_ROLL: EXPermissions.CAMERA_ROLL,
     LOCAL_NOTIFICATIONS: EXPermissions.USER_FACING_NOTIFICATIONS,
     NOTIFICATIONS: EXPermissions.NOTIFICATIONS,
+    SETTINGS: EXPermissions.SYSTEM_BRIGHTNESS,
     SETTINGS: EXPermissions.SYSTEM_BRIGHTNESS,
 };
 
@@ -18,4 +21,5 @@ export const DANGEROUS_PERMISSIONS: Permissions[] = [
     PERMISSIONS.AUDIO_RECORDING,
     PERMISSIONS.CAMERA_ROLL,
     PERMISSIONS.SYSTEM_BRIGHTNESS,
+
 ];
