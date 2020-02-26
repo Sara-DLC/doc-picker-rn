@@ -4,8 +4,8 @@ import {
 StyleSheet, 
 Text, 
 TouchableOpacity, 
-View, 
-Alert } from 'react-native';
+View } from 'react-native';
+
 
 export default class App extends Component {
 
@@ -19,7 +19,7 @@ this.state = {
 async SingleFilePicker() {
 try {
     const res = await DocumentPicker.getDocumentAsync({
-    type: "*",
+    type: "*/* ",
     copyToCacheDirectory: false,
     multiple: false
     });
@@ -47,7 +47,6 @@ return (
         Click Here To Pick File
         </Text>
     </TouchableOpacity>
-
     </View>
 );
 }

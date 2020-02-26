@@ -1,6 +1,6 @@
 import React from 'react';
 import * as Permissions from './Permissions';
-import * as DocumentPicker from 'expo-document-picker';
+import DocumentPicker from 'expo-document-picker';
 import { 
 StyleSheet, 
 Text, 
@@ -27,6 +27,8 @@ try {
     type: '*', 
     });
 
+    this.setState({ singleFileOBJ: res });
+
 } catch (err) {
     console.log(err)
     }
@@ -36,7 +38,7 @@ return (
 
     <Text style={styles.text}>
         File Name: 
-        {/* {this.state.singleFileOBJ.name ? this.state.singleFileOBJ.name : ''} */}
+        {this.state.singleFileOBJ.name ? this.state.singleFileOBJ.name : ''}
 
     </Text>
 
