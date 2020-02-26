@@ -27,7 +27,7 @@ try {
     type: '*', 
     });
 
-
+    this.setState({ singleFileOBJ: res });
 
 } catch (err) {
     console.log(err)
