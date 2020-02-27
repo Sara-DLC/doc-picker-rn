@@ -7,23 +7,29 @@ import {
     View,
 } from 'react-native';
 
+/**********************************************************/
 
-export default function App(props) {
+export default function AddDocPicker(props) {
+
     const [ file, setFile ] = useState({});
 
     async function pickFile() {
-        try {
-            const response = await DocumentPicker.getDocumentAsync({
+        DocumentPicker
+            .getDocumentAsync({
+                /* MIME type */
                 type: '*/*',
+                /* whether to cache file for other expo APIs to use */
                 copyToCacheDirectory: false,
+                /* whether to let user select multiple files */
                 multiple: false,
+            })
+            .then ((re) => {
+                setFile(re);
+            })
+            .catch ((error) => {
+                console.error('--- There was a problem selecting a file. ---');
+                console.log(error);
             });
-
-            setFile(response);
-        }
-        catch (err) {
-            console.log(err);
-        }
     }
 
     return (
@@ -45,53 +51,10 @@ export default function App(props) {
 
         </View>
     );
+
 }
 
-// class App extends Component {
-
-//     constructor(props) {
-//         super(props);
-//         this.state = {
-//             singleFileOBJ: '',
-//         };
-//     }
-
-//     async SingleFilePicker() {
-//         try {
-//             const res = await DocumentPicker.getDocumentAsync({
-//                 type: '*/* ',
-//                 copyToCacheDirectory: false,
-//                 multiple: false,
-//             });
-
-//             this.setState({ singleFileOBJ: res });
-
-//         }
-//         catch (err) {
-//             console.log(err);
-//         }
-//     }
-
-//     render() {
-//         return (
-//             <View style={styles.MainContainer}>
-
-//                 <Text style={styles.text}>
-//         File Name: {this.state.singleFileOBJ.name ? this.state.singleFileOBJ.name : ''}
-//                 </Text>
-
-//                 <TouchableOpacity
-//                     activeOpacity={0.5}
-//                     style={styles.button}
-//                     onPress={this.SingleFilePicker.bind(this)}>
-//                     <Text style={styles.buttonText}>
-//         Click Here To Pick File
-//                     </Text>
-//                 </TouchableOpacity>
-//             </View>
-//         );
-//     }
-// }
+/**********************************************************/
 
 const styles = StyleSheet.create({
     MainContainer: {
